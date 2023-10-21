@@ -6,36 +6,37 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.JOptionPane;
 
 public class AdministradoresModel {
 
-    public void crearRegistro(Empleado empleado) {
+    public void crearRegistro(Empleado empleado, int cantidadRegistros) {
         Connection conexion = Conexion.obtenerConexion();
-        int cantidad=obtenerEmpleadosPorNombre("Administrador");
-        //verificar donde colocar la comparacion de que los empleados administradores sean menores a 5
-        if (conexion != null) {
+
+        // Verificar que la cantidad de empleados administrativos sea menor a 5
+        if (conexion != null && cantidadRegistros < 5) {
             try {
-                String insertQuery = "INSERT INTO empleado (nombre, puesto) VALUES (?,?)";
+                String insertQuery = "INSERT INTO empleado (id_empleado, nombre, puesto) VALUES (?, ?, ?)";
                 PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
-                preparedStatement.setString(1, empleado.getNombre());
-                preparedStatement.setString(2, empleado.getPuesto());
+                preparedStatement.setString(1, empleado.getIdEmpleado());
+
+                preparedStatement.setString(2, empleado.getNombre());
+                preparedStatement.setString(3, empleado.getPuesto());
 
                 int filasInsertadas = preparedStatement.executeUpdate();
 
                 if (filasInsertadas > 0) {
-                    System.out.println("Registro de empleado insertado con éxito.");
+                    JOptionPane.showMessageDialog(null, "Registro de empleado insertado con éxito.");
                 } else {
-                    System.out.println("No se pudo insertar el registro de empleado.");
+                    JOptionPane.showMessageDialog(null, "No se pudo insertar el registro de empleado.");
                 }
             } catch (SQLException e) {
-                System.out.println("Error al crear el registro: " + e.getMessage());
+                JOptionPane.showConfirmDialog(null,"Error al crear el registro: " + e.getMessage());
             } finally {
                 Conexion.cerrarConexion(conexion);
             }
         } else {
-            System.out.println("No se pudo establecer la conexión a la base de datos.");
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el registro de empleado. La cantidad máxima de empleados administrativos se ha alcanzado.");
         }
     }
 
@@ -45,7 +46,7 @@ public class AdministradoresModel {
 
         if (conexion != null) {
             try {
-                String selectQuery = "SELECT count(*) FROM empleado WHERE puesto = 'Administrador' ?";
+                String selectQuery = "SELECT count(*) FROM empleado WHERE puesto = ?";
                 PreparedStatement preparedStatement = conexion.prepareStatement(selectQuery);
                 preparedStatement.setString(1, puesto);
 
@@ -54,22 +55,14 @@ public class AdministradoresModel {
                 if (resultSet.next()) {
                     cantidadEmpleados = resultSet.getInt(1);
                 }
-
             } catch (SQLException e) {
-                System.out.println("Error al obtener los empleados por nombre: " + e.getMessage());
+                System.out.println("Error al obtener a los administradores: " + e.getMessage());
             } finally {
                 Conexion.cerrarConexion(conexion);
             }
-        } else {
-            System.out.println("No se pudo establecer la conexión a la base de datos.");
         }
 
         return cantidadEmpleados;
     }
+
 }
-
-
-
-
-
-

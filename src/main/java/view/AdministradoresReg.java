@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
+import controller.AdministradoresController;
+import entity.Empleado;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,13 +9,19 @@ import java.awt.event.ActionListener;
 
 public class AdministradoresReg {
 
+    public static AdministradoresController controller;
+    public static Empleado empleado;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            createAndShowGUI();
+            crearYMostrarFormulario();
         });
     }
 
-    private static void createAndShowGUI() {
+    private static void crearYMostrarFormulario() {
+        controller= new AdministradoresController();
+        controller.AdministradoresController();
+        empleado=new Empleado();
         // Crear un nuevo marco (JFrame)
         JFrame frame = new JFrame("Registro de Administradores");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,23 +34,23 @@ public class AdministradoresReg {
         frame.add(panel);
 
         // Etiquetas y campos de entrada
-        JLabel nameLabel = new JLabel("Nombre:");
-        nameLabel.setBounds(10, 50, 80, 30);
+        JLabel idLabel = new JLabel("id");
+        idLabel.setBounds(10, 50, 80, 30);
+
+        JTextField idEmpleado = new JTextField();
+        idEmpleado.setBounds(100, 50, 120, 30); // (x, y, ancho, alto)
+
+        JLabel nombreLabel = new JLabel("Nombre:");
+        nombreLabel.setBounds(10, 90, 80, 30);
 
         JTextField nombre = new JTextField();
-        nombre.setBounds(100, 50, 120, 30); // (x, y, ancho, alto)
+        nombre.setBounds(100, 90, 120, 30);
 
-        JLabel lastNameLabel = new JLabel("Apellido:");
-        lastNameLabel.setBounds(10, 90, 80, 30);
+        JLabel puestoLabel = new JLabel("Puesto:");
+        puestoLabel.setBounds(10, 130, 80, 30);
 
-        JTextField lastNameField = new JTextField();
-        lastNameField.setBounds(100, 90, 120, 30);
-
-        JLabel emailLabel = new JLabel("Correo Electrónico:");
-        emailLabel.setBounds(10, 130, 80, 30);
-
-        JTextField emailField = new JTextField();
-        emailField.setBounds(100, 130, 120, 30);
+        JTextField puesto = new JTextField();
+        puesto.setBounds(100, 130, 120, 30);
 
         // Botón de registro
         JButton registerButton = new JButton("Registrar");
@@ -54,24 +58,25 @@ public class AdministradoresReg {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nombre.getText();
-                String lastName = lastNameField.getText();
-                String email = emailField.getText();
-
-                // Aquí puedes realizar acciones con los datos ingresados, como guardarlos en una base de datos.
-                System.out.println("Nombre: " + name);
-                System.out.println("Apellido: " + lastName);
-                System.out.println("Correo Electrónico: " + email);
+                empleado.setIdEmpleado(idEmpleado.getText());
+                empleado.setNombre(nombre.getText());
+                empleado.setPuesto(puesto.getText());
+                int cantidadRegistros=controller.obtenerEmpleadosPorNombre("Administrativo");
+                try {
+                    controller.crearRegistro(empleado, cantidadRegistros);
+                } catch (Exception err) {
+                    System.out.println("El registro no pudo insertarse");
+                }
             }
         });
 
         // Agregar componentes al panel en lugar de al marco
-        panel.add(nameLabel);
+        panel.add(idLabel);
+        panel.add(idEmpleado);
+        panel.add(nombreLabel);
         panel.add(nombre);
-        panel.add(lastNameLabel);
-        panel.add(lastNameField);
-        panel.add(emailLabel);
-        panel.add(emailField);
+        panel.add(puestoLabel);
+        panel.add(puesto);
         panel.add(registerButton);
 
         // Obtener el tamaño de la pantalla
