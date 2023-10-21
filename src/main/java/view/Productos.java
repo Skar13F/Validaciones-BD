@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.ProductoController;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +14,7 @@ import java.util.regex.Pattern;
  * @author labinfo02
  */
 public class Productos extends javax.swing.JFrame {
-
+      public static ProductoController vCadena;
     /**
      * Creates new form Productos
      */
@@ -76,25 +77,13 @@ public class Productos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-            if(validarCadena(jTextField1.getText())==true){
+            if(vCadena.validarCadena(jTextField1.getText())==true){
                 jTextField2.setText("ID Valido");
             }else{
                 jTextField2.setText("ID no Valido");
             }
     }//GEN-LAST:event_jButton1ActionPerformed
- public static boolean validarCadena(String cadena) {
-        // El patrón regex para tres letras seguidas de cuatro números
-        String patron = "^[A-Za-z]{3}\\d{4}$";
-        
-        // Compilar la expresión regular en un objeto Pattern
-        Pattern pattern = Pattern.compile(patron);
-        
-        // Crear un objeto Matcher para la cadena
-        Matcher matcher = pattern.matcher(cadena);
-        
-        // Verificar si la cadena coincide con el patrón
-        return matcher.matches();
-    }
+
     /**
      * @param args the command line arguments
      */
