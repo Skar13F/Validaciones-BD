@@ -1,18 +1,19 @@
+/**
+ *Fecha de creaciòn:22 de octubre 2023
+ * @author Nancy Obed Martìnez Miguel
+ * Descripción: es una interfaz de usuario para la gestión de clientes. Permite a los usuarios ingresar información de clientes, 
+ * como ID, nombre y ciudad, y registrarla en una base de datos PostgreSQL utilizando la clase ClienteController.
+ * También realiza validaciones de datos antes de la inserción.*/
 package view;
 
 import controller.ClienteController;
 import javax.swing.JOptionPane;
 import entity.Cliente;
 
-/**
- *
- * @author labinfo07
- */
+
 public class ClienteView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ClienteView
-     */
+   
     private ClienteController controller;
     public static ClienteController CadenaRevisar;
     public static ClienteController a;
@@ -136,16 +137,16 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       if (a.validarIdClientes(jTextField1.getText()) == true) {
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(jTextField1.getText());
-        cliente.setNombre(jTextField2.getText());
-        cliente.setCd(jTextField3.getText());
-        a.crearRegistro(cliente);
-        JOptionPane.showMessageDialog(this, "Registro creado con éxito.");
-    } else {
-        JOptionPane.showMessageDialog(this, "ID de cliente no válido. Debe contener 3 dígitos numéricos.");
-    }
+        if (a.validarIdClientes(jTextField1.getText()) == true) {
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(jTextField1.getText());
+            cliente.setNombre(jTextField2.getText());
+            cliente.setCd(jTextField3.getText());
+            a.crearRegistro(cliente);
+            JOptionPane.showMessageDialog(this, "Registro creado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID de cliente no válido. Debe contener 3 dígitos numéricos.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
