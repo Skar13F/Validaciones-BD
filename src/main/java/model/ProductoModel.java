@@ -4,8 +4,14 @@
  */
 package model;
 
+import conection.Conexion;
+import entity.Producto;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,4 +31,30 @@ public class ProductoModel {
         // Verificar si la cadena coincide con el patrón
         return matcher.matches();
     }
+     
+     public void crearRegistro(Producto producto) {
+        Connection conexion = Conexion.obtenerConexion();
+
+        // Verificar que la cantidad de empleados administrativos sea menor a 5
+        if (conexion != null ) {
+            try {
+                String insertQuery = "INSERT INTO producto (id_producto) VALUES (?)";
+                PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
+                preparedStatement.setString(1, producto.getIdProducto());
+
+
+                preparedStatement.executeUpdate();
+
+               
+            } catch (SQLException e) {
+                JOptionPane.showConfirmDialog(null,"Error al crear el registro: " + e.getMessage());
+            } finally {
+                Conexion.cerrarConexion(conexion);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el registro de empleado. La cantidad máxima de empleados administrativos se ha alcanzado.");
+        }
+    }
+
+     
 }

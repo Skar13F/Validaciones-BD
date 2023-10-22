@@ -5,6 +5,7 @@
 package view;
 
 import controller.ProductoController;
+import entity.Producto;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class Productos extends javax.swing.JFrame {
       public static ProductoController vCadena;
+      public static  ProductoController Insprod;
+      public static  Producto producto;
     /**
      * Creates new form Productos
      */
@@ -76,9 +79,12 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+                producto =  new Producto();
             if(vCadena.validarCadena(jTextField1.getText())==true){
                 jTextField2.setText("ID Valido");
+                
+                 producto.setIdProducto(jTextField1.getText());
+                Insprod.crearRegistro(producto);
             }else{
                 jTextField2.setText("ID no Valido");
             }
