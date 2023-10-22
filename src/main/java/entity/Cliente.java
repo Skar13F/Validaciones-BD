@@ -33,7 +33,8 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "idCliente")
     private Collection<Venta> ventaCollection;
 
-    public Cliente() {
+   public Cliente() {
+        
     }
 
     public Cliente(String idCliente) {

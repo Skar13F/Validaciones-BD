@@ -18,16 +18,22 @@ public class ClienteModel {
         String patron = "^[0-9]{3}$";
         return idCliente.matches(patron);
     }
-     public void crearRegistro(Cliente cliente) {
+    public void crearRegistro(Cliente cliente) {
     Connection conexion = Conexion.obtenerConexion();
 
     if (conexion != null) {
         try {
-            String insertQuery = "INSERT INTO cliente (id_cliente, nombre, ciudad) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO Cliente (id_cliente, nombre, ciudad) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
-            preparedStatement.setString(1, cliente.getIdCliente());
-            preparedStatement.setString(2, cliente.getNombre());
-            preparedStatement.setString(3, cliente.getCd());
+
+            // Establece los valores en el orden correcto
+            preparedStatement.setString(1, cliente.getIdCliente());  // ID del cliente
+            preparedStatement.setString(2, cliente.getNombre());       // Nombre del cliente
+            preparedStatement.setString(3, cliente.getCd());   
+             System.out.println("ID del cliente: " + cliente.getIdCliente());
+             System.out.println("Nombre del cliente: " + cliente.getNombre());
+             System.out.println("Ciudad del cliente: " + cliente.getCd());
+           
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -39,5 +45,6 @@ public class ClienteModel {
         JOptionPane.showMessageDialog(null, "No se pudo insertar el registro del cliente. Verifica la conexión a la base de datos.");
     }
 }
+
 
 }
