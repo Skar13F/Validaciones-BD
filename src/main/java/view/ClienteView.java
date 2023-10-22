@@ -14,13 +14,14 @@ public class ClienteView extends javax.swing.JFrame {
      * Creates new form ClienteView
      */
     private ClienteController controller;
-          public static ClienteController CadenaRevisar;
-           public static  ClienteController a;
+    public static ClienteController CadenaRevisar;
+    public static ClienteController a;
 
-    
     public ClienteView() {
         initComponents();
         controller = new ClienteController();
+        a = new ClienteController();
+
     }
 
     /**
@@ -135,14 +136,12 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       Cliente c1=new Cliente();
-       
-    
-    if (CadenaRevisar.validarIdClientes(jTextField1.getText())==true) {
-        c1.setIdCliente(jTextField1.getText());
-        c1.setNombre(jTextField2.getText());
-        c1.setCd(jTextField3.getText());
-        a.crearRegistro(c1);
+       if (a.validarIdClientes(jTextField1.getText()) == true) {
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(jTextField1.getText());
+        cliente.setNombre(jTextField2.getText());
+        cliente.setCd(jTextField3.getText());
+        a.crearRegistro(cliente);
         JOptionPane.showMessageDialog(this, "Registro creado con éxito.");
     } else {
         JOptionPane.showMessageDialog(this, "ID de cliente no válido. Debe contener 3 dígitos numéricos.");
