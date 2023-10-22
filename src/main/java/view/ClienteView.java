@@ -1,20 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
+
+import controller.ClienteController;
+import javax.swing.JOptionPane;
+import entity.Cliente;
 
 /**
  *
  * @author labinfo07
  */
-public class Cliente extends javax.swing.JFrame {
+public class ClienteView extends javax.swing.JFrame {
 
     /**
-     * Creates new form Cliente
+     * Creates new form ClienteView
      */
-    public Cliente() {
+    private ClienteController controller;
+
+    public ClienteView() {
         initComponents();
+        controller = new ClienteController();
     }
 
     /**
@@ -59,6 +63,11 @@ public class Cliente extends javax.swing.JFrame {
         });
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,6 +131,20 @@ public class Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    String idCliente = jTextField1.getText();
+    String nombre = jTextField2.getText();
+    String ciudad = jTextField3.getText();
+    if (controller.validarIdClientes(idCliente)) {
+        Cliente c1 = new Cliente();
+        controller.crearRegistro(c1);
+        JOptionPane.showMessageDialog(this, "Registro creado con éxito.");
+    } else {
+        JOptionPane.showMessageDialog(this, "ID de cliente no válido. Debe contener 3 dígitos numéricos.");
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,7 +175,7 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new ClienteView().setVisible(true);
             }
         });
     }
