@@ -45,7 +45,7 @@ public class InventarioModel {
             Connection connection = Conexion.obtenerConexion();
 
             try {
-                String updateQuery = "UPDATE inventario SET existencia = ? WHERE id_producto = ?";
+                String updateQuery = "UPDATE venta_detalles SET existencia = ? WHERE id_producto = ?";
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
                 updateStatement.setInt(1, nuevaExistencia);
                 updateStatement.setString(2, idProducto);
