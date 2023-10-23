@@ -31,6 +31,7 @@ public class ClienteModel {
 
 
                 preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Registro creado con éxito.");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error al crear el registro del cliente: " + e.getMessage());
             } finally {

@@ -143,7 +143,7 @@ public class ClienteView extends javax.swing.JFrame {
             cliente.setNombre(jTextField2.getText());
             cliente.setCd(jTextField3.getText());
             a.crearRegistro(cliente);
-            JOptionPane.showMessageDialog(this, "Registro creado con éxito.");
+            
         } else {
             JOptionPane.showMessageDialog(this, "ID de cliente no válido. Debe contener 3 dígitos numéricos.");
         }
