@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class Conexion {
     // Configura la información de la base de datos
-    private static final String URL = "jdbc:postgresql://localhost:5432/pruebaBDD";
+    private static final String URL = "jdbc:postgresql://localhost:5432/ejemplo1";
     private static final String USUARIO = "postgres";
-    private static final String CONTRASENA = "";
+    private static final String CONTRASENA = "C4ntr4x123#";
 
     public static Connection obtenerConexion() {
         Connection conexion = null;

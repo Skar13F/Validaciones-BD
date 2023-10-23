@@ -38,11 +38,13 @@ public class ProductoModel {
         // Verificar que la cantidad de empleados administrativos sea menor a 5
         if (conexion != null ) {
             try {
-                String insertQuery = "INSERT INTO producto (id_producto) VALUES (?)";
+                String insertQuery = "INSERT INTO producto (id_producto) VALUES ('"+producto.getIdProducto()+"')";
                 PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
-                preparedStatement.setString(1, producto.getIdProducto());
-
-
+                
+               // preparedStatement.setString(1, producto.getIdProducto());
+                
+                JOptionPane.showConfirmDialog(null, producto.getIdProducto());
+                     
                 preparedStatement.executeUpdate();
 
                
