@@ -16,13 +16,11 @@ public class AdministradoresModel {
         // Verificar que la cantidad de empleados administrativos sea menor a 5
         if (conexion != null && cantidadRegistros < 5) {
             try {
-                String insertQuery = "INSERT INTO empleado (id_empleado, nombre, puesto) VALUES (?, ?, ?)";
+                String insertQuery = "INSERT INTO empleado (id_empleado, nombre, puesto) VALUES (?, ?,'"+empleado.getPuesto()+"')";
                 PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
                 preparedStatement.setString(1, empleado.getIdEmpleado());
-
+                
                 preparedStatement.setString(2, empleado.getNombre());
-                preparedStatement.setString(3, empleado.getPuesto());
-
                 int filasInsertadas = preparedStatement.executeUpdate();
 
                 if (filasInsertadas > 0) {
@@ -46,10 +44,8 @@ public class AdministradoresModel {
 
         if (conexion != null) {
             try {
-                String selectQuery = "SELECT count(*) FROM empleado WHERE puesto = ?";
+                String selectQuery = "SELECT count(*) FROM empleado WHERE puesto = '"+puesto+"'";
                 PreparedStatement preparedStatement = conexion.prepareStatement(selectQuery);
-                preparedStatement.setString(1, puesto);
-
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
