@@ -19,9 +19,9 @@ public class AdministradoresReg {
     }
 
     private static void crearYMostrarFormulario() {
-        controller= new AdministradoresController();
+        controller = new AdministradoresController();
         controller.AdministradoresController();
-        empleado=new Empleado();
+        empleado = new Empleado();
         // Crear un nuevo marco (JFrame)
         JFrame frame = new JFrame("Registro de Administradores");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +61,9 @@ public class AdministradoresReg {
                 empleado.setIdEmpleado(idEmpleado.getText());
                 empleado.setNombre(nombre.getText());
                 empleado.setPuesto(puesto.getText());
-                int cantidadRegistros=controller.obtenerEmpleadosPorNombre("Administrativo");
+                int cantidadRegistros = controller.obtenerEmpleadosPorNombre(empleado.getPuesto());
+                JOptionPane.showConfirmDialog(null, "administrativos: "+cantidadRegistros);
+
                 try {
                     controller.crearRegistro(empleado, cantidadRegistros);
                 } catch (Exception err) {
