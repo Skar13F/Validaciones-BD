@@ -26,13 +26,9 @@ public class ClienteModel {
 
         if (conexion != null) {
             try {
-                String insertQuery = "INSERT INTO Cliente (id_cliente, nombre, ciudad) VALUES (?, ?, ?)";
+                String insertQuery = "INSERT INTO cliente (id_cliente, nombre, cd) VALUES ('"+cliente.getIdCliente()+"', '"+cliente.getNombre()+"', '"+cliente.getCd()+"')";
                 PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
 
-                // Establece los valores en el orden correcto
-                preparedStatement.setString(1, cliente.getIdCliente());  // ID del cliente
-                preparedStatement.setString(2, cliente.getNombre());       // Nombre del cliente
-                preparedStatement.setString(3, cliente.getCd());
 
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
