@@ -84,9 +84,8 @@ public class Productos extends javax.swing.JFrame {
         if (vCadena.validarCadena(jTextField1.getText()) == true) {
 
             producto.setIdProducto(jTextField1.getText());
-            jTextField2.setText(producto.getIdProducto());
-            
-            JOptionPane.showConfirmDialog(null, producto.getIdProducto());
+            jTextField2.setText("ID valido");
+           
             vCadena.crearRegistro(producto);
         } else {
             jTextField2.setText("ID no Valido");

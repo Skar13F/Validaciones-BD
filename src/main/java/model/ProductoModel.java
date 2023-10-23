@@ -43,7 +43,7 @@ public class ProductoModel {
                 
                // preparedStatement.setString(1, producto.getIdProducto());
                 
-                JOptionPane.showConfirmDialog(null, producto.getIdProducto());
+                
                      
                 preparedStatement.executeUpdate();
 

@@ -21,7 +21,7 @@ public class ProductoController {
         return model.validarCadena(cadena);
     }
     public void crearRegistro(Producto producto){
-       JOptionPane.showConfirmDialog(null,producto.getIdProducto());
+      
         model.crearRegistro(producto);
        
     }  
