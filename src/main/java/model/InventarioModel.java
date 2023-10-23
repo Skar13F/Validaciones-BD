@@ -23,7 +23,6 @@ public class InventarioModel {
                 inventario = new Inventario();
                 inventario.setIdProducto(resultSet.getString("id_producto"));
                 inventario.setExistencia(resultSet.getInt("existencia"));
-                // Puedes establecer más propiedades aquí si es necesario.
             }
 
             resultSet.close();
@@ -46,7 +45,7 @@ public class InventarioModel {
             Connection connection = Conexion.obtenerConexion();
 
             try {
-                String updateQuery = "UPDATE venta_detalles SET existencia = ? WHERE id_producto = ?";
+                String updateQuery = "UPDATE inventario SET existencia = ? WHERE id_producto = ?";
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
                 updateStatement.setInt(1, nuevaExistencia);
                 updateStatement.setString(2, idProducto);
