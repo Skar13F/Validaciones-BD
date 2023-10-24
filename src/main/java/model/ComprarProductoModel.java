@@ -15,9 +15,9 @@ public class ComprarProductoModel {
 
         if (conexion != null) {
             try {
-                String selectQuery = "SELECT existencia FROM Inventario WHERE id_producto = ?";
+                String selectQuery = "SELECT existencia FROM Inventario WHERE id_producto = '"+idProducto+"'";
                 PreparedStatement preparedStatement = conexion.prepareStatement(selectQuery);
-                preparedStatement.setString(1, idProducto);
+                //preparedStatement.setString(1, idProducto);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -35,21 +35,21 @@ public class ComprarProductoModel {
     }
 
    public void insertarVentaDetalle(int idVenta, String idProducto, int cantidad, int existencia) {
-    if (existencia<=cantidad) {
+    if (cantidad<=existencia) {
         Connection conexion = Conexion.obtenerConexion();
 
         if (conexion != null) {
             try {
-                String insertQuery = "INSERT INTO Venta_detalle (id_Venta, id_Producto, cantidad) VALUES (?, ?, ?)";
+                String insertQuery = "INSERT INTO Venta_detalle (id_Venta, id_Producto, cantidad) VALUES (?,?, ?)";
                 PreparedStatement preparedStatement = conexion.prepareStatement(insertQuery);
                 preparedStatement.setInt(1, idVenta);
-                preparedStatement.setString(2, idProducto);
+              preparedStatement.setString(2, idProducto);
                 preparedStatement.setInt(3, cantidad);
 
                 int filasAfectadas = preparedStatement.executeUpdate();
 
                 if (filasAfectadas > 0) {
-                    JOptionPane.showMessageDialog(null, "Registro de empleado insertado con éxito.");
+                    JOptionPane.showMessageDialog(null, "Registro de compra exitosa");
                 }
             } catch (SQLException e) {
                 System.out.println("Error al insertar en Venta_detalle: " + e.getMessage());
