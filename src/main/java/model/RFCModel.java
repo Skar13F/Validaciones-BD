@@ -29,13 +29,12 @@ public class RFCModel {
             connection = Conexion.obtenerConexion(); // Asegúrate de que esta línea obtenga una conexión válida a tu base de datos
 
             // Define la consulta SQL para la inserción
-            sql = "INSERT INTO Empleado (id_empleado, nombre, puesto) VALUES (?, ?, ?)";
+            sql = "INSERT INTO Empleado (id_empleado, nombre, puesto) VALUES (?, ?, '"+empleado.getPuesto()+"')";
             preparedStatement = connection.prepareStatement(sql);
 
             // Establece los valores de los parámetros en la consulta SQL
             preparedStatement.setString(1, empleado.getIdEmpleado());
             preparedStatement.setString(2, empleado.getNombre());
-            preparedStatement.setString(3, empleado.getPuesto());
 
             // Ejecuta la consulta de inserción
             int filasAfectadas = preparedStatement.executeUpdate();
