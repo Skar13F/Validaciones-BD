@@ -12,7 +12,6 @@ public class AdministradoresController {
     }
 
     public void crearRegistro(Empleado empleado,int cantidadRegistros) {
-        //int cantidadRegistros = obtenerEmpleadosPorNombre("Administrativo");
         model.crearRegistro(empleado,cantidadRegistros);
     }
 

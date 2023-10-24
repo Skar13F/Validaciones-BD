@@ -7,6 +7,7 @@ package controller;
 import entity.Producto;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import model.ProductoModel;
 
 /**
@@ -20,6 +21,8 @@ public class ProductoController {
         return model.validarCadena(cadena);
     }
     public void crearRegistro(Producto producto){
+      
         model.crearRegistro(producto);
+       
     }  
 }

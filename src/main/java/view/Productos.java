@@ -6,18 +6,18 @@ package view;
 
 import controller.ProductoController;
 import entity.Producto;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author labinfo02
  */
 public class Productos extends javax.swing.JFrame {
-      public static ProductoController vCadena;
-      public static  ProductoController Insprod;
-      public static  Producto producto;
+
+    public static ProductoController vCadena;
+
+    public static Producto producto;
+
     /**
      * Creates new form Productos
      */
@@ -79,15 +79,17 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                producto =  new Producto();
-            if(vCadena.validarCadena(jTextField1.getText())==true){
-                jTextField2.setText("ID Valido");
-                
-                 producto.setIdProducto(jTextField1.getText());
-                Insprod.crearRegistro(producto);
-            }else{
-                jTextField2.setText("ID no Valido");
-            }
+        producto = new Producto();
+        vCadena = new ProductoController();
+        if (vCadena.validarCadena(jTextField1.getText()) == true) {
+
+            producto.setIdProducto(jTextField1.getText());
+            jTextField2.setText("ID valido");
+           
+            vCadena.crearRegistro(producto);
+        } else {
+            jTextField2.setText("ID no Valido");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
